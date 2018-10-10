@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     mount_devise_token_auth_for 'User', at: 'auth'
-    resources :users, only: [:index, :create, :update]
+    resources :users, only: [:index, :create, :update, :destroy]
 
     devise_scope :user do
       # Generate password reset email and route to password reset form
