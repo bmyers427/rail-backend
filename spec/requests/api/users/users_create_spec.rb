@@ -4,6 +4,7 @@ describe "api::users#create", type: :request do
   let(:default_params) {{ user: {
     first_name: "Test First",
     last_name: "Test Last",
+    username: "Test Username",
     email: "test1@test.com",
     password: "test123",
     password_confirmation: "test123"
