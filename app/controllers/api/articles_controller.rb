@@ -1,6 +1,4 @@
-class ArticlesController < ApiController
-  before_action :set_user
-  before_action :set_user_article, only: [:update, :destroy]
+class Api::ArticlesController < ApiController
 
   # GET /Users/:User_id/articles
   def index
@@ -9,11 +7,13 @@ class ArticlesController < ApiController
 
   # POST /Users/:User_id/articles
   def create
-    if @user.articles.create!(article_params)
-      @user.article
+    @article = Article.new(article_params)
+    @article.save!
+    if @article
+      @article
     else
       render json: {
-        error: @user.article.errors,
+        error: @article.errors,
         message: 'Creating article failed.'
       }, status: :unprocessable_entity
     end
@@ -48,13 +48,5 @@ class ArticlesController < ApiController
   def article_params
     params.require(:article)
     .permit(:title, :tagline, :body)
-  end
-
-  def set_user
-    @user = User.find(params[:User_id])
-  end
-
-  def set_user_article
-    @article = @user.articles.find_by!(id: params[:id]) if @user
   end
 end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     mount_devise_token_auth_for 'User', at: 'auth'
     resources :users, only: [:index, :create, :update, :destroy] do
       resources :articles, only: [:index, :create, :update, :destroy]
+      # adds articles associated with each user
     end
 
     devise_scope :user do
