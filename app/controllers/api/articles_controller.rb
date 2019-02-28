@@ -2,14 +2,14 @@ class Api::ArticlesController < ApiController
 
   # GET /Users/:User_id/articles
   def index
-    @articles = Article.all
+    @articles = Article.where(user_id: params[:user_id])
   end
 
   # POST /Users/:User_id/articles
   def create
     @article = Article.new(article_params)
-    @article.save!
-    if @article
+    #@article.user_id = params[:user_id]
+    if @article.save
       @article
     else
       render json: {
@@ -47,6 +47,6 @@ class Api::ArticlesController < ApiController
 
   def article_params
     params.require(:article)
-    .permit(:title, :tagline, :body)
+    .permit(:title, :tagline, :body, :user_id)
   end
 end
