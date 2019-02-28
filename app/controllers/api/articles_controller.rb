@@ -21,6 +21,7 @@ class Api::ArticlesController < ApiController
 
   # PUT /Users/:User_id/articles/:id
   def update
+    @article = Article.find(params[:id])
     if @article.update(article_params)
       @article
     else
