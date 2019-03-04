@@ -34,6 +34,7 @@ class Api::ArticlesController < ApiController
 
   # DELETE /Users/:User_id/articles/:id
   def destroy
+    @article = Article.find(params[:id])
     if @article.destroy
       @article
     else
